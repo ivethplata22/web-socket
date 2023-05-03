@@ -45,9 +45,14 @@ class Server {
             });
 
             // Informacion llega la servidor
-            socket.on('enviar-mensaje', ( payload ) => {
-                // Ya que recibamos un mensaje vamos a emitirlo a todos los clientes conectados
-                this.io.emit('enviar-mensaje', payload);
+            socket.on('enviar-mensaje', ( payload, callback ) => {
+                // Podemos regresar valor por callback al cliente que mando el mensaje
+                const id = 123456;
+                // Tratar de mandar la menor informacion posible
+                callback( { id, fecha: new Date().getTime() } );
+
+                // Emitimos el mensaje a los clientes conectados
+                // this.io.emit('enviar-mensaje', payload);
             });
         });
     }
