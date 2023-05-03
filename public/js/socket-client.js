@@ -8,17 +8,22 @@ const socket = io();
 
 // Escuchar eventos
 socket.on('connect', () => {
-    console.log('Conectado');
+    // console.log('Conectado');
 
     lblOffline.style.display = 'none';
     lblOnline.style.display = '';
 });
 
 socket.on('disconnect', () => {
-    console.log('Desconectado del servidor');
+    // console.log('Desconectado del servidor');
 
     lblOnline.style.display = 'none';
     lblOffline.style.display = '';
+});
+
+// Escuchamos los eventos que el servidor emita
+socket.on('enviar-mensaje', (payload) => {
+    console.log('Recibimos payload: ', payload);
 });
 
 // Cada que se presiona el boton lo escuchamos con este evento
